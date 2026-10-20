@@ -21,6 +21,7 @@ import os
 import sys
 import asyncio
 import logging
+import threading
 from typing import Dict, List, Optional
 from datetime import timedelta
 
@@ -28,6 +29,9 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from dotenv import load_dotenv
+
+# Web server port pinging for Render Free Tier & UptimeRobot
+from flask import Flask
 
 # Official Google GenAI SDK import
 from google import genai
@@ -44,6 +48,27 @@ logging.basicConfig(
 logger = logging.getLogger("FlareCoachBot")
 
 load_dotenv()
+
+# ------------------------------------------------------------------------------
+# KEEP ALIVE WEB SERVER (For Render Web Service & UptimeRobot)
+# ------------------------------------------------------------------------------
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Flare Coach Bot is Alive and Running 24/7!"
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
+def keep_alive():
+    t = threading.Thread(target=run_web)
+    t.daemon = True
+    t.start()
+
+# Web server chalu kora jate Render Port pay
+keep_alive()
 
 # Placeholders with environment variable fallbacks
 DISCORD_BOT_TOKEN: str = os.getenv("DISCORD_BOT_TOKEN", "aa495a2c776455823221651ed123b02af83db2dba7786e36f0fab12bab730935")
@@ -704,4 +729,5 @@ def main():
 
 
 if __name__ == "__main__":
+    keep_alive()  # Web server start korbe jate Render-er port issue na hoy
     main()
