@@ -70,7 +70,7 @@ def keep_alive():
 # Placeholders with environment variable fallbacks
 DISCORD_BOT_TOKEN: str = os.getenv("DISCORD_BOT_TOKEN", "")
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 
 # Core Server Constants
 SERVER_NAME: str = "TEAM FLARE"
