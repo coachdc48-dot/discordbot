@@ -67,9 +67,6 @@ def keep_alive():
     t.daemon = True
     t.start()
 
-# Web server chalu kora jate Render Port pay
-keep_alive()
-
 # Placeholders with environment variable fallbacks
 DISCORD_BOT_TOKEN: str = os.getenv("DISCORD_BOT_TOKEN", "aa495a2c776455823221651ed123b02af83db2dba7786e36f0fab12bab730935")
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "AQ.Ab8RN6IIgHnTdWVBzECsgf0IKbPkFYPJ6_uaJYnM1304WQ9lRQ")
